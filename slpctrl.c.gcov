@@ -1,0 +1,61 @@
+        -:    0:Source:slpctrl.c
+        -:    0:Graph:slpctrl.gcno
+        -:    0:Data:slpctrl.gcda
+        -:    0:Runs:1
+        -:    0:Programs:1
+        -:    1:/**
+        -:    2:* \file
+        -:    3:*
+        -:    4:* \brief SLPCTRL related functionality implementation.
+        -:    5:*
+        -:    6:(c) 2018 Microchip Technology Inc. and its subsidiaries.
+        -:    7:
+        -:    8:Subject to your compliance with these terms,you may use this software and
+        -:    9:any derivatives exclusively with Microchip products.It is your responsibility
+        -:    10:to comply with third party license terms applicable to your use of third party
+        -:    11:software (including open source software) that may accompany Microchip software.
+        -:    12:
+        -:    13:THIS SOFTWARE IS SUPPLIED BY MICROCHIP "AS IS". NO WARRANTIES, WHETHER
+        -:    14:EXPRESS, IMPLIED OR STATUTORY, APPLY TO THIS SOFTWARE, INCLUDING ANY IMPLIED
+        -:    15:WARRANTIES OF NON-INFRINGEMENT, MERCHANTABILITY, AND FITNESS FOR A
+        -:    16:PARTICULAR PURPOSE.
+        -:    17:
+        -:    18:IN NO EVENT WILL MICROCHIP BE LIABLE FOR ANY INDIRECT, SPECIAL, PUNITIVE,
+        -:    19:INCIDENTAL OR CONSEQUENTIAL LOSS, DAMAGE, COST OR EXPENSE OF ANY KIND
+        -:    20:WHATSOEVER RELATED TO THE SOFTWARE, HOWEVER CAUSED, EVEN IF MICROCHIP HAS
+        -:    21:BEEN ADVISED OF THE POSSIBILITY OR THE DAMAGES ARE FORESEEABLE. TO THE
+        -:    22:FULLEST EXTENT ALLOWED BY LAW, MICROCHIP'S TOTAL LIABILITY ON ALL CLAIMS IN
+        -:    23:ANY WAY RELATED TO THIS SOFTWARE WILL NOT EXCEED THE AMOUNT OF FEES, IF ANY,
+        -:    24:THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
+        -:    25:*
+        -:    26:*/
+        -:    27:
+        -:    28:/**
+        -:    29:* \defgroup doc_driver_system_slpctrl Sleep Controller
+        -:    30:* \ingroup doc_driver_system
+        -:    31:*
+        -:    32:* \section doc_driver_slpctrl_rev Revision History
+        -:    33:* - v0.0.0.1 Initial Commit
+        -:    34:*
+        -:    35:*@{
+        -:    36:*/
+        -:    37:#include &lt;slpctrl.h&gt;
+        -:    38:
+        -:    39:/**
+        -:    40:* \brief Initialize Sleep Controller
+        -:    41:*
+        -:    42:* \return Initialization status.
+        -:    43:*/
+        -:    44:int8_t SLPCTRL_init()
+        1:    45:{
+        -:    46:
+        1:    47:SLPCTRL.CTRLA = 1 &lt;&lt; SLPCTRL_SEN_bp       /* Sleep enable: enabled */
+        -:    48:| SLPCTRL_SMODE_STDBY_gc; /* Standby Mode */
+        -:    49:
+        -:    50:return 0;
+        1:    51:}
+        -:    52:
+        -:    53:void SLPCTRL_set_sleep_mode(SLPCTRL_SMODE_t setmode)
+    #####:    54:{
+    #####:    55:SLPCTRL.CTRLA = (SLPCTRL.CTRLA &amp ~SLPCTRL_SMODE_gm) | (setmode &amp SLPCTRL_SMODE_gm);
+        -:    56:}
